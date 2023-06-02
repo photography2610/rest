@@ -1,0 +1,192 @@
+<html>
+
+<head>
+    <title>
+        Artem Sydorenko
+    </title>
+    <script type="text/javascript">
+        function setfocus() {
+            document.telefon.txt2.focus(); return;
+        }
+        function test1(form) {
+            if (form.txt3.value.length <= 4) {
+                alert("Podaj Wiecej niz 4znaki!")
+            }
+            else {
+                alert("Cześć " + form.txt3.value + " ! Informacja poprawna!");
+            }
+        }
+
+        function test2(form) {
+            if (form.txt2.value == "" || form.txt2.value.indexOf('@', 0) == -1) {
+                alert("Niepoprawny adres poczty elektronicznej!");
+            }
+            else {
+                alert("GUTENTAG!");
+            }
+        }
+
+        function obliczanie(dane) {
+            wynik.innerHTML = " ";
+            cena_koncowa = 0;
+            var temp;
+            /*ciasta*/
+            switch (dane.ciastko.selectedIndex) {
+                case 1:
+                    cena_koncowa = cena_koncowa + 14;
+                    temp = "(0 + 14";
+                    break;
+                case 2:
+                    cena_koncowa = cena_koncowa + 12;
+                    temp = "(0 + 12";
+                    break;
+                case 3:
+                    temp = "(0 + 13";
+                    cena_koncowa = cena_koncowa + 13;
+                    break;
+
+                default:
+                    break;
+            }
+            /*dodatki*/
+            switch (dane.dodatki.selectedIndex) {
+                case 1:
+                    cena_koncowa = cena_koncowa + 3;
+                    temp += " + 3"
+                    break;
+                case 2:
+                    temp += " + 4"
+                    cena_koncowa = cena_koncowa + 4;
+                    break;
+                default:
+                    break;
+            }
+
+            /*napoje*/
+            switch (dane.napoje.selectedIndex) {
+                case 1:
+                    cena_koncowa = cena_koncowa + 8;
+                    temp += " + 8"
+                    break;
+                case 2:
+                    cena_koncowa = cena_koncowa + 7;
+                    temp += " + 7"
+                    break;
+                case 3:
+                    cena_koncowa = cena_koncowa + 6;
+                    temp += " + 6"
+                    break;
+                default:
+                    break;
+            }
+            /*ukr*/
+            switch (dane.ukraine.selectedIndex) {
+                case 1:
+                    cena_koncowa = cena_koncowa + 8;
+                    temp += " + 8"
+                    break;
+                case 2:
+                    cena_koncowa = cena_koncowa + 7;
+                    temp += " + 7"
+                    break;
+                case 3:
+                    cena_koncowa = cena_koncowa + 6;
+                    temp += " + 6"
+                    break;
+                default:
+                    break;
+            }
+
+
+            /*vat*/
+            if (dane.wybor[0].checked) {
+                cena_koncowa = cena_koncowa;
+                temp += ") * 1"
+            }
+            if (dane.wybor[1].checked) {
+                cena_koncowa = 1.07 * cena_koncowa;
+                temp += ") * 1.07"
+            }
+            if (dane.wybor[2].checked) {
+                cena_koncowa = 1.23 * cena_koncowa;
+                temp += ") * 1.23"
+            }
+            wynik.innerHTML = "do zaplaty " + cena_koncowa.toFixed(2) + " zl <br>";
+            wynik.innerHTML += temp +`<br> ${imie.txt3.value} ${nazwisko.txt1.value}: <br> ${telefon.txt2.value} <br> ${mail.txt2.value} <br> ${adres.txt4.value}`;
+        
+        }
+    </script>
+</head>
+
+<body onLoad="setfocus()" >
+    <div style="background-image: url('https://pliki.well.pl/i/01/73/25/017325_r2_1320.jpg');text-align: center;color: black;font-family: 'Comic Sans MS', 'Comic Sans', monospace;">
+        <H1 style="color: rgb(255, 255, 255);">Restauracja(Artem Sydorenko)</H1>
+
+        <form name="nazwisko" style="color: rgb(255, 255, 255);">
+            Wpisz swoje nazwisko:<br>
+            <input type="text" name="txt1">
+        </form>
+        <form name="imie" style="color: rgb(255, 255, 255);" >
+            Wpisz swoje imie:<br>
+            <input type="text" name="txt3">
+            <input type="button" name="button1" value="Test" onClick="test1(this.form)">
+        </form>
+        <form name="telefon" style="color: rgb(255, 255, 255);">
+            Wpisz telefon:<br>
+            <input type="text" name="txt2">
+        </form>
+        <form name="mail" style="color: rgb(255, 255, 255);" >
+            Wpisz adres swojej poczty elektronicznej:<br>
+            <input type="text" name="txt2">
+            <input type="button" name="button2" value="Test" onClick="test2(this.form)">
+        </form>
+        <form method=post action="mailto:dowolny@mail.pl"> </form>
+        <form name="adres" style="color: rgb(255, 255, 255);">
+            Wpisz adres zamieszkania:<br>
+            <input type="text" name="txt4">
+        </form>
+
+
+        <br>
+        <form name="formularz" style="color: rgb(255, 255, 255);">
+            <h3>Menu</H3><br>
+                Wybierz zupe<select name="ciastko"/><br>
+            <option value="0"> nic
+            <option value="1"> Żurek- 12zł	
+            <option value="2">Zupa pomidorowa - 10zł
+            <option value="3"> Zupa ogórkowa - 12zł
+            </select><br><br>
+            Wybierz drugie dnia<select name="dodatki"/><br>
+            <option value="0"> nic
+            <option value="1"> ziemniaki z pieczarkami - 8zł
+            <option value="2"> ryż z rybą - 10zł
+            <option value="3"> kasza grzyczana - 6zł
+            <option value="4"> bulgur - 6zł
+            </select><br><br>
+            Wybierz napoje<select name="napoje"/><br>
+            <option value="0"> nic
+            <option value="1"> coca-cola - 5zł
+            <option value="2"> sprite - 5zł
+            <option value="3"> sok jabłkowy - 5zł
+                <option value="3"> herbata - 6zł
+                    <option value="3"> kawa - 6zł
+            </select><br><br>
+            Wybierz deser<select name="ukraine"/><br>
+            <option value="0"> nic
+            <option value="1"> Napoleon - 15zł
+            <option value="2"> Szarlotka - 12zł
+            <option value="3"> Słodkie pieczywo -10zł
+            </select><br><br>
+            <H3 style="color: rgb(255, 255, 255);">Podaj VAT:</H3><br>
+            vat 0%  <input type="radio" name="wybor" value=0 /><br><br>
+            vat 7%  <input type="radio" name="wybor" value=1 /><br><br>
+            vat 23%  <input type="radio" name="wybor" value=2 /><br><br>
+            <input style="font-size: 25px;" type="button" value="Oblicz" onClick="obliczanie(this.form)" /><br><br>
+        </form>
+        <table>
+            <tr id="wynik"></tr>
+        </table>
+    </div>
+</body>
+
+</html>
